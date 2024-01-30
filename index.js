@@ -1,6 +1,7 @@
 const http = require("http");
 const members = require("./members");
 const users = require("./users");
+const moment = require("moment");
 
 const server = http
   .createServer((req, res) => {
@@ -17,6 +18,7 @@ const server = http
           Status: "success",
           Message: "response success",
           Description: "Exercise #02",
+          Date: moment().format(),
           Data: members,
         })
       );
