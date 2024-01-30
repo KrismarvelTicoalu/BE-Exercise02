@@ -1,5 +1,6 @@
 const http = require("http");
 const members = require("./members");
+const users = require("./users");
 
 const server = http
   .createServer((req, res) => {
@@ -19,6 +20,9 @@ const server = http
           Data: members,
         })
       );
+    } else if (url === "/users") {
+      res.setHeader("Content-Type", "text/json");
+      res.write(JSON.stringify(users));
     }
     res.end();
   })

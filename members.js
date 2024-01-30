@@ -17,6 +17,12 @@ const members = [
     nama: "Siregar, Hizkia Gaynell Pascal",
     nomorTelp: "081347170494",
   },
+  {
+    id: 4,
+    nim: "105022110050",
+    nama: "Gracecilia Keren Toding Rante",
+    nomorTelp: "087780452117",
+  },
 ];
 
-Name: NIM: module.exports = members;
+module.exports = members;
