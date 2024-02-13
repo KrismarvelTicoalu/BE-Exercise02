@@ -12,3 +12,4 @@ users = [
     name: "Bob",
   },
 ];
+module.exports = users;
