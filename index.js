@@ -3,9 +3,8 @@ const app = express();
 const port = 3000;
 
 // // middleware untuk menangani request body
-const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.post("/student/login", (req, res) => {
   res.json({
