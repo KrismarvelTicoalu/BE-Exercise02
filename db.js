@@ -5,7 +5,7 @@ const pool = new Pool({
   password: "admin",
   host: "localhost",
   port: 5432, // default Postgres port
-  database: "test-backend",
+  database: "backend",
 });
 
 module.exports = {
