@@ -4,7 +4,7 @@ const express = require("express");
 
 const router = express.Router();
 
-app.get("/students", async (req, res) => {
+router.get("/students", async (req, res) => {
   try {
     const allStudents = await prisma.students.findMany();
     res.status(200).json({
@@ -17,7 +17,7 @@ app.get("/students", async (req, res) => {
   }
 });
 
-app.post("/students", async (req, res) => {
+router.post("/students", async (req, res) => {
   const { nim, nama, alamat, jurusan } = req.body;
   try {
     await prisma.students.create({
@@ -39,7 +39,7 @@ app.post("/students", async (req, res) => {
 });
 
 // Get student by ID
-app.get("/students/:nim", async (req, res) => {
+router.get("/students/:nim", async (req, res) => {
   try {
     const student = await prisma.students.findUnique({
       where: {
@@ -57,7 +57,7 @@ app.get("/students/:nim", async (req, res) => {
 });
 
 // Update Student by ID
-app.patch("/students/:nim", async (req, res) => {
+router.patch("/students/:nim", async (req, res) => {
   const { nama, alamat, jurusan } = req.body;
   try {
     const updateUser = await prisma.students.update({
@@ -81,7 +81,7 @@ app.patch("/students/:nim", async (req, res) => {
 });
 
 // Delete Student by ID
-app.delete("/students/:nim", async (req, res) => {
+router.delete("/students/:nim", async (req, res) => {
   try {
     const deleteUser = await prisma.students.delete({
       where: {
@@ -97,3 +97,5 @@ app.delete("/students/:nim", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+module.exports = router;
