@@ -4,7 +4,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/students", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const allStudents = await prisma.students.findMany();
     res.status(200).json({
@@ -17,7 +17,7 @@ router.get("/students", async (req, res) => {
   }
 });
 
-router.post("/students", async (req, res) => {
+router.post("/", async (req, res) => {
   const { nim, nama, alamat, jurusan } = req.body;
   try {
     await prisma.students.create({
@@ -39,7 +39,7 @@ router.post("/students", async (req, res) => {
 });
 
 // Get student by ID
-router.get("/students/:nim", async (req, res) => {
+router.get("/:nim", async (req, res) => {
   try {
     const student = await prisma.students.findUnique({
       where: {
@@ -57,7 +57,7 @@ router.get("/students/:nim", async (req, res) => {
 });
 
 // Update Student by ID
-router.patch("/students/:nim", async (req, res) => {
+router.patch("/:nim", async (req, res) => {
   const { nama, alamat, jurusan } = req.body;
   try {
     const updateUser = await prisma.students.update({
@@ -81,7 +81,7 @@ router.patch("/students/:nim", async (req, res) => {
 });
 
 // Delete Student by ID
-router.delete("/students/:nim", async (req, res) => {
+router.delete("/:nim", async (req, res) => {
   try {
     const deleteUser = await prisma.students.delete({
       where: {
