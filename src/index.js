@@ -12,7 +12,7 @@ app.use(express.json());
 
 const studentController = require("./student/student.controller");
 
-app.use("students/", studentController);
+app.use("/students", studentController);
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
