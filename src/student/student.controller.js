@@ -1,13 +1,13 @@
-// Layer untuk handle request dan response
-// Biasanya juga handle validasi body
 const express = require("express");
 const prisma = require("../db");
+const { getAllStudents, getStudentByNim } = require("./student.service");
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const allStudents = await prisma.students.findMany();
+    const allStudents = await getAllStudents();
+
     res.status(200).json({
       status: "success",
       data: allStudents,
@@ -42,11 +42,8 @@ router.post("/", async (req, res) => {
 // Get student by ID
 router.get("/:nim", async (req, res) => {
   try {
-    const student = await prisma.students.findUnique({
-      where: {
-        nim: req.params.nim,
-      },
-    });
+    const student = await getStudentByNim(req.params.nim);
+
     res.status(200).json({
       status: "success",
       data: student,
