@@ -3,9 +3,6 @@ const app = express();
 const port = 3000;
 const db = require("../db");
 
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
-
 // // middleware untuk menangani request body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
