@@ -15,7 +15,24 @@ const getStudentByNim = async (nim) => {
 
   return student;
 };
+
+const updateStudentByNim = async (nim, nama, alamat, jurusan) => {
+  const student = await prisma.students.update({
+    where: {
+      nim,
+    },
+    data: {
+      nama,
+      alamat,
+      jurusan,
+    },
+  });
+
+  return student;
+};
+
 module.exports = {
   getAllStudents,
   getStudentByNim,
+  updateStudentByNim,
 };

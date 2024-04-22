@@ -1,6 +1,10 @@
 const express = require("express");
 const prisma = require("../db");
-const { getAllStudents, getStudentByNim } = require("./student.service");
+const {
+  getAllStudents,
+  getStudentByNim,
+  updateStudentByNim,
+} = require("./student.service");
 
 const router = express.Router();
 
@@ -58,16 +62,13 @@ router.get("/:nim", async (req, res) => {
 router.patch("/:nim", async (req, res) => {
   const { nama, alamat, jurusan } = req.body;
   try {
-    const updateUser = await prisma.students.update({
-      where: {
-        nim: req.params.nim,
-      },
-      data: {
-        nama: nama,
-        alamat: alamat,
-        jurusan: jurusan,
-      },
-    });
+    const updateUser = await updateStudentByNim(
+      req.params.nim,
+      nama,
+      alamat,
+      jurusan
+    );
+
     res.status(200).json({
       status: "success",
       message: "data berhasil diperbarui",
