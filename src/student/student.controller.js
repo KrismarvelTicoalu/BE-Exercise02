@@ -4,6 +4,7 @@ const {
   getAllStudents,
   getStudentByNim,
   updateStudentByNim,
+  addStudent,
 } = require("./student.service");
 
 const router = express.Router();
@@ -25,14 +26,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const { nim, nama, alamat, jurusan } = req.body;
   try {
-    await prisma.students.create({
-      data: {
-        nim: nim,
-        nama: nama,
-        alamat: alamat,
-        jurusan: jurusan,
-      },
-    });
+    await addStudent(nim, nama, alamat, jurusan);
+
     res.status(200).json({
       status: "success",
       message: "data berhasil dimasukan",
