@@ -44,9 +44,20 @@ const addStudent = async (nim, nama, alamat, jurusan) => {
   return student;
 };
 
+const deleteStudentByNim = async (nim) => {
+  const student = await prisma.students.delete({
+    where: {
+      nim,
+    },
+  });
+
+  return student;
+};
+
 module.exports = {
   getAllStudents,
   getStudentByNim,
   updateStudentByNim,
   addStudent,
+  deleteStudentByNim,
 };

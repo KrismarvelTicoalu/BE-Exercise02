@@ -5,6 +5,7 @@ const {
   getStudentByNim,
   updateStudentByNim,
   addStudent,
+  deleteStudentByNim,
 } = require("./student.service");
 
 const router = express.Router();
@@ -77,11 +78,8 @@ router.patch("/:nim", async (req, res) => {
 // Delete Student by ID
 router.delete("/:nim", async (req, res) => {
   try {
-    const deleteUser = await prisma.students.delete({
-      where: {
-        nim: req.params.nim,
-      },
-    });
+    const deleteUser = await deleteStudentByNim(req.params.nim);
+
     res.status(200).json({
       status: "success",
       message: "data berhasil dihapus",
