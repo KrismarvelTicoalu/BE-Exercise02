@@ -1,55 +1,38 @@
 const prisma = require("../db");
+const {
+  findStudents,
+  findStudentByNim,
+  editStudentByNim,
+  insertStudent,
+  removeStudentByNim,
+} = require("./student.repository");
 
 const getAllStudents = async () => {
-  const students = await prisma.students.findMany();
+  const students = await findStudents();
 
   return students;
 };
 
 const getStudentByNim = async (nim) => {
-  const student = await prisma.students.findUnique({
-    where: {
-      nim,
-    },
-  });
+  const student = await findStudentByNim(nim);
 
   return student;
 };
 
 const updateStudentByNim = async (nim, nama, alamat, jurusan) => {
-  const student = await prisma.students.update({
-    where: {
-      nim,
-    },
-    data: {
-      nama,
-      alamat,
-      jurusan,
-    },
-  });
+  const student = await editStudentByNim(nim, nama, alamat, jurusan);
 
   return student;
 };
 
 const addStudent = async (nim, nama, alamat, jurusan) => {
-  const student = await prisma.students.create({
-    data: {
-      nim,
-      nama,
-      alamat,
-      jurusan,
-    },
-  });
+  const student = await insertStudent(nim, nama, alamat, jurusan);
 
   return student;
 };
 
 const deleteStudentByNim = async (nim) => {
-  const student = await prisma.students.delete({
-    where: {
-      nim,
-    },
-  });
+  const student = await removeStudentByNim(nim);
 
   return student;
 };
